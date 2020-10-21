@@ -1,4 +1,4 @@
-﻿<?php include('lib\server.php') ?>
+<?php include('lib\server.php') ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +19,7 @@
                     <div class="card-header" style="text-align: center;"><b>Register</b></div>
                     <div class="card-body">
                          <form class="form-horizontal" method="post" action="register.php">
-						<?php include('lib\errors.php'); ?>
+					
 							<div class="form-group">
                                         <label for="name" class="cols-sm-2 control-label">Your Name</label>
                                         <div class="cols-sm-10">
