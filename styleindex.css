@@ -1,0 +1,38 @@
+body{
+	border-style: solid;
+	border-radius: 10px;
+}
+#container{
+	width: 100%;
+	height: auto;
+	border-radius: 20px;
+	border-style: solid;
+	background-color: #333333;
+	border-color: black;
+	display: inline-block;
+}
+#menu-left{
+	list-style-type: none;
+}
+#menu-left li{
+	float: left;
+	padding-bottom: 15px;
+}
+
+#menu-left li a{
+	color: white;
+	text-decoration: none;
+	display: block;
+	margin-left: 50px;
+
+}
+#menu-right{
+	list-style-type: none;
+	color: white;
+	text-decoration: none;
+	display: block;
+	float: right;
+	margin-right: 5px;
+}
+
+

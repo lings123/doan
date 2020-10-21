@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+<body>
+	<?php require_once("lib\connection.php"); ?>
+	<?php
+	if (isset($_POST["btn_submit"])) {
+		//lấy thông tin từ các form bằng phương thức POST
+		$username = $_POST["username"];
+		$password = $_POST["pass"];
+		$passwordcf=$_POST["passcf"];
+		$name = $_POST["name"];
+		$email = $_POST["email"];
+		//Kiểm tra điều kiện bắt buộc đối với các field không được bỏ trống
+		if ($username == "" || $password == ""|| $passwordcf == "" || $name == "" || $email == "") {
+			echo '<script type="text/javascript">alert("Vui lòng nhập đầy đủ thông tin")</script>';
+		}
+		if ($password!=$passwordcf){
+		echo '<script type="text/javascript">alert("Mật khẩu không trùng khớp")</script>';
+	}
+		else{
+			$sql = "INSERT INTO users(username, password,passwordcf, fullname, email, createdate ) VALUES ( '$username', '$password','$passwordcf', '$name', '$email', now())";
+			// thực thi câu $sql với biến conn lấy từ file connection.php
+			mysqli_query($conn,$sql);
+			echo '<script type="text/javascript">alert("Thanh công")</script>';
+			
+		}
+	}
+
+?>
+	<div class="form">
+		
+			<h2><p id="chu" align="center"> Login </p></h2>
+			<p>
+				<label style="color: #FFFFFF;" for="username">Username: </label>
+				<input type="text" name="username" id="username" placeholder="Username"/>
+			</p>
+			<p>
+				<label for="password" style="color: #FFFFFF ;">Password: </label>
+				&nbsp;<input type="password" name="password" id="password" placeholder="PassWord"/>
+			</p>
+			<p>
+				<button class="b1" type="submit">Login</button>
+				<button class="b2" type="" ><a href="register.php">Create account</a></button>
+			</p>
+			<a href="#" title="forgetpass" style="padding-left: 65%; color: #FFFFFF;" >Forget Password</a>
+	</div>
+</body>
+</html>
