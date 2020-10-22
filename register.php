@@ -25,7 +25,7 @@
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" />
+                                                <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" />*
                                             </div>
                                         </div>
                             </div>
@@ -34,7 +34,7 @@
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="email" id="email" placeholder="Enter your Email" />
+                                                <input type="text" class="form-control" name="email" id="email" placeholder="Enter your Email" />*
                                             </div>
                                         </div>
                                     </div>
@@ -43,7 +43,7 @@
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username" />
+                                                <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username" />*
                                             </div>
                                         </div>
                                     </div>
@@ -52,7 +52,7 @@
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                <input type="password" class="form-control" name="password_1" placeholder="Enter your Password" />
+                                                <input type="password" class="form-control" name="password_1" placeholder="Enter your Password" />*
                                             </div>
                                         </div>
                                     </div>
@@ -61,50 +61,27 @@
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                <input type="password" class="form-control" name="password_2" placeholder="Confirm your Password" />
+                                                <input type="password" class="form-control" name="password_2" placeholder="Confirm your Password" />*
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group ">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block login-button" name="reg_user">Register</button>
                                     </div>
-                                    <div class="login-register">Already have an account?
+
+                                    <div class="login-register" style="font-weight: bold;">Already have an account?
                                         <a href="login.php"> Login</a>
                                     </div>
+                                    <div class="form-group ">
+                                        (*): required
+                                     </div>
                                 </form>
                             </div>
 
                         </div>
                     </div>
-                </div>s
+                </div>
 </div>
 
-				
-				<!-- <tr>
-					<td><label for="password" style="color: #000000 ;">Password: </label></td>
-					<td><input type="password" name="password_1"></td>
-				</tr>
-				<tr>
-					<td><label for="passwordcf" style="color: #000000 ;">Confirm password: </label></td>
-					<td><input type="password" name="password_2"></td>
-				</tr>
-				<tr>
-					<td><label for="name" style="color: #000000 ;">Full Name: </label></td>
-					<td><input type="text" name="name" ></td>
-				</tr>
-				<tr>
-					<td><label for="email" style="color: #000000 ;">Email: </label>
-				</td>
-					<td><input type="email" name="email" value="<?php echo $email; ?>"></td>
-				</tr>
-				<tr>
-					<td colspan=2 align="center" style="padding-top: 20px;"> <button type="submit" class="btn" name="reg_user">Register</button></td>
-				</tr>
-				
-			</table>
-		</div>
-	</form> -->
-
-	
 </body>
 </html>

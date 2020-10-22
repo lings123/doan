@@ -10,24 +10,8 @@ $password_1="";
 $password_2="";
 $date=date('y-m-d H:i:s');;
 
-$host="localhost";
-$root="root";
-$pass="";
-$dbname="qlhh";
-try{
-  $options = array(
-PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
-PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-);
-$conn = new PDO("mysql:host=$host;dbname=$dbname", $root, $pass,$options);
- // Set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
-  $conn->getAttribute(constant("PDO::ATTR_CONNECTION_STATUS"));}
-catch (PDOException $e) {
-            echo '{"error":{"text":' . $e->getMessage() . '}}';
-        }
-// $conn = mysqli_connect($host, $root, $pass, $dbname);
+
+require_once("connection.php");
 // REGISTER USER
 if (isset($_POST['reg_user'])) {
   // receive all input values from the form
@@ -43,18 +27,30 @@ if (isset($_POST['reg_user'])) {
         exit;
     }
   if ($password_1 != $password_2) {
-	// array_push($errors, "The two passwords do not match");
    echo '<script language="javascript">alert("Mật khẩu không trùng khớp"); window.location="register.php";</script>';
    exit;
   }
+  //Kiểm tra password
+  $password_check='/^([A-Z]){1}([\w_\.!@#$%^&*()]+){5,31}$/';
+  if(!preg_match($password_check, $password_1)){
+      echo '<script language="javascript">alert("password không hợp lệ!"); window.location="register.php";</script>';
+   exit;
+ }
   $password = md5($password_1);
+  //Kiểm tra email
   $email_check='#^[a-z][a-z0-9\._]{2,31}@[a-z0-9\-]{3,}(\.[a-z]{2,4}){1,2}$#';
    if(!preg_match($email_check, $email)){
       echo '<script language="javascript">alert("Email không hợp lệ!"); window.location="register.php";</script>';
    exit;
    }
+  //Kiểm tra username
+  $username_check='/^[a-z0-9_\.]{6,32}$/';
+  if(!preg_match($username_check, $username)){
+      echo '<script language="javascript">alert("username không hợp lệ!"); window.location="register.php";</script>';
+   exit;
+ }
   
-  
+
   $user_check_query =$conn->prepare("SELECT * FROM users WHERE username=:username OR email=:email");
   $user_check_query->setFetchMode(PDO::FETCH_ASSOC);
   $user_check_query->execute(array('username'=>$username,'email'=>$email));
@@ -83,11 +79,42 @@ if (isset($_POST['reg_user'])) {
   $query->bindParam(5, $date);
 
   if($query->execute()){
-     echo '<script language="javascript">alert("Đăng ký thành công"); window.location="index.html";</script>'; 
+     echo '<script language="javascript">alert("Đăng ký thành công! Vui lòng đăng nhập."); window.location="login.php";</script>'; 
+  }
+}
+//LOGIN
+if (isset($_POST['log_user'])){
+  if($_POST['usernamelg']!=""||$_POST['passwordlg']!=""){
+     $usernamelg = $_POST['usernamelg'];
+     $passwordlg_m = $_POST['passwordlg'];
+     $passwordlg = md5($passwordlg_m);
+      $sql = "SELECT * FROM users WHERE (username=:username OR email=:email) AND password=:password";
+      $query = $conn->prepare($sql);
+      $query->setFetchMode(PDO::FETCH_ASSOC);
+      $query->execute(array('username'=>$usernamelg,'email'=>$usernamelg,'password'=>$passwordlg));
+       while ($user=$query->fetch()) {
+      
+          if ($user['username'] === $usernamelg || $user['email']===$usernamelg ){
+            if($user['password']===$passwordlg) {
+               echo '<script language="javascript">alert("Đăng nhập thành công! "); window.location="index.html";</script>'; 
+
+          }
+        }
+        if(($user['username'] !== $usernamelg || $user['email']!==$usernamelg)||$user['password']!==$passwordlg) {
+         echo '<script language="javascript">alert("Username or password is not correct!! vui lòng nhập lại"); window.location="login.php";</script>';
+            exit;
+        }
+      }
+    }
+        
+  else
+  {
+      echo '<script language="javascript">alert("Vui lòng nhập đầy đủ thông tin!!"); window.location="login.php";</script>';
+            exit;
   }
 }
 
-
+$conn=null;
 
 
 
