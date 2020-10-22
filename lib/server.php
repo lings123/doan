@@ -1,15 +1,14 @@
 
 <?php
 session_start();
-
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 // initializing variables
 $username = "";
 $email    = "";
 $Name="";
 $password_1="";
 $password_2="";
-$now = time();
-$date=date("y-m-d h:i:s", $now);
+$date=date('y-m-d H:i:s');;
 
 $host="localhost";
 $root="root";
@@ -55,19 +54,14 @@ if (isset($_POST['reg_user'])) {
    exit;
    }
   
-  // $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' ";
-  // $result = mysqli_query($conn,$user_check_query);
-  // $user = mysqli_fetch_array($result,MYSQLI_ASSOC);
   
   $user_check_query =$conn->prepare("SELECT * FROM users WHERE username=:username OR email=:email");
   $user_check_query->setFetchMode(PDO::FETCH_ASSOC);
   $user_check_query->execute(array('username'=>$username,'email'=>$email));
  
-  while (  $user=$user_check_query->fetch()) {
-    # code...
+  while ($user=$user_check_query->fetch()) {
     if ($user['username'] === $username) {
-      // array_push($errors, "Username already exists");
-      // 
+      
       echo '<script language="javascript">alert("Tên đăng nhập này đã có người dùng. Vui lòng chọn tên đăng nhập khác"); window.location="register.php";</script>';
         exit;
     }
@@ -79,37 +73,9 @@ if (isset($_POST['reg_user'])) {
     }
   }
 
-  // if ($user) { // if user exists
-  //   if ($user['username'] === $username) {
-  //     // array_push($errors, "Username already exists");
-  //     // 
-  //     echo '<script language="javascript">alert("Tên đăng nhập này đã có người dùng. Vui lòng chọn tên đăng nhập khác"); window.location="register.php";</script>';
-  //       exit;
-  //   }
-
-  //   if ($user['email'] === $email) {
-  //     // array_push($errors, "email already exists");
-  //      echo '<script language="javascript">alert("Email này đã có người dùng. Vui lòng chọn Email khác."); window.location="register.php";</script>';
-  //       exit;
-  //   }
-  // }
 
   	$query =$conn->prepare ("INSERT INTO users (username, email, password,fullname,createdate) VALUES(?,?,?,?,?)");
-   //  mysqli_query($db, $query);
-//    try {
-//     $sql ="INSERT INTO users(username, password,fullname, emails) VALUES ( '$username', '$password',$name', '$email')";
-//       // thực thi câu $sql với biến conn lấy từ file connection.php
-//     $conn->exec($sql);
-//       echo '<script language="javascript">alert("Đăng ký thành công"); window.location="index.html";</script>';   
-//    } catch(PDOException $e) {
-//   echo $sql . "<br>" . $e->getMessage();
-// }
-//     $conn=null;
-    // $_SESSION['username'] = $username;
-     
-  // if(mysqli_query($conn,$query)){
-  //   echo '<script language="javascript">alert("Đăng ký thành công"); window.location="index.html";</script>'; 
-  // }      
+   
   $query->bindParam(1, $username);
   $query->bindParam(2, $email);
   $query->bindParam(3, $password);

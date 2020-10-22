@@ -25,7 +25,7 @@
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-                                                <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username" />
+                                                <input type="text" class="form-control" name="usernamelg" id="username" placeholder="Enter your Username" />
                                             </div>
                                         </div>
                                     </div>
@@ -34,7 +34,7 @@
                                         <div class="cols-sm-10">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                                                <input type="password" class="form-control" name="password_1" placeholder="Enter your Password" />
+                                                <input type="password" class="form-control" name="passwordlg" placeholder="Enter your Password" />
                                             </div>
                                         </div>
                                     </div>
