@@ -84,10 +84,14 @@ if (isset($_POST['reg_user'])) {
 }
 //LOGIN
 if (isset($_POST['log_user'])){
-  if($_POST['usernamelg']!=""||$_POST['passwordlg']!=""){
-     $usernamelg = $_POST['usernamelg'];
-     $passwordlg_m = $_POST['passwordlg'];
-     $passwordlg = md5($passwordlg_m);
+  $usernamelg = $_POST['usernamelg'];
+  $passwordlg_m = $_POST['passwordlg'];
+  if(!$usernamelg || !$passwordlg_m){
+         echo '<script language="javascript">alert("Vui lòng nhập đầy đủ thông tin!!"); window.location="login.php";</script>';
+            exit;
+          }
+  else{
+      $passwordlg = md5($passwordlg_m);
       $sql = "SELECT * FROM users WHERE (username=:username OR email=:email) AND password=:password";
       $query = $conn->prepare($sql);
       $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -100,18 +104,15 @@ if (isset($_POST['log_user'])){
 
           }
         }
-        if(($user['username'] !== $usernamelg || $user['email']!==$usernamelg)||$user['password']!==$passwordlg) {
+      }
+        if(($user['username'] != $usernamelg || $user['email']!=$usernamelg)||$user['password']!=$passwordlg) {
          echo '<script language="javascript">alert("Username or password is not correct!! vui lòng nhập lại"); window.location="login.php";</script>';
             exit;
         }
-      }
+      
     }
         
-  else
-  {
-      echo '<script language="javascript">alert("Vui lòng nhập đầy đủ thông tin!!"); window.location="login.php";</script>';
-            exit;
-  }
+
 }
 
 $conn=null;
